@@ -1,0 +1,117 @@
+module.exports={
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User API",
+        "description": "API to manage Subscribers",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/subscribers": {
+            "get": {
+                "description": "Retrieves a List of Subscribers.",
+                "responses": {
+                    "200": {
+                        "description": "success Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscribers/{id}": {
+            "get": {
+                "description": "Retrieves a subscriber",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscribers/names": {
+            "get": {
+                "description": "Retrieves list of names of Subscribers",
+                "responses": {
+                    "200": {
+                        "description": "success Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "description": "unique identifier of user"
+                                            },
+                                            "subscribedChannel": {
+                                                "type": "string",
+                                                "description": "name of the subscribed channel"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "unique identifier of the user"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name of the user"
+                    },
+                    "subscribedChannel": {
+                        "type": "string",
+                        "description": "name of the subscribed channel"
+                    },
+                    "subscribedDate": {
+                        "type": "string",
+                        "description": "date of the day of subscription"
+                    }
+                }
+            }
+        }
+    }
+}
